@@ -39,14 +39,72 @@ public final class Route
      * Creates a new route.
      * 
      * @param from the starting city
-     * @param to the ending city
+     * @param to   the ending city
      */
     public Route(City from, City to)
     {
         Objects.requireNonNull(from, "from cannot be null");
         Objects.requireNonNull(to, "to cannot be null");
-        
+
         this.from = from;
         this.to = to;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = 1;
+
+        final int prime = 31;
+        result = prime * result + ((from == null) ? 0 : from.hashCode());
+        result = prime * result + ((to == null) ? 0 : to.hashCode());
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+
+        if (obj == null)
+        {
+            return false;
+        }
+
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+
+        Route other = (Route) obj;
+        if (from == null)
+        {
+            if (other.from != null)
+            {
+                return false;
+            }
+        }
+        else if (!from.equals(other.from))
+        {
+            return false;
+        }
+
+        if (to == null)
+        {
+            if (other.to != null)
+            {
+                return false;
+            }
+        }
+        else if (!to.equals(other.to))
+        {
+            return false;
+        }
+
+        return true;
     }
 }

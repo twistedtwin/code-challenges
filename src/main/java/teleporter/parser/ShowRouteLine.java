@@ -1,5 +1,5 @@
 /**
- * LoopSearchLine.java
+ * ShowRouteLine.java
  *
  * Copyright 2018 Michael G. Leatherman <michael.g.leatherman@gmail.com>
  *
@@ -23,35 +23,22 @@
  */
 package teleporter.parser;
 
-import java.util.Objects;
-
-import teleporter.data.City;
-
 /**
- * Represents a line requesting a loop search.
+ * Represents a line indicating a request to show all routes.
  */
-public final class LoopSearchLine extends Line
+public final class ShowRouteLine extends Line
 {
-    /** The city to search from. */
-    public final City city;
-
     /**
      * Creates a new line representation.
-     * 
-     * @param city the city to search from
      */
-    public LoopSearchLine(City city)
+    public ShowRouteLine()
     {
-        super(Command.LOOP_SEARCH);
-
-        Objects.requireNonNull(city, "city cannot be null");
-
-        this.city = city;
+        super(Command.SHOW_ROUTES);
     }
 
     @Override
     public String toString()
     {
-        return "LoopSearchLine [city=" + city + ", command=" + command + "]";
+        return "ShowRouteLine [command=" + command + "]";
     }
 }

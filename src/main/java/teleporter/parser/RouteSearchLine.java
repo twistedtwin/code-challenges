@@ -53,4 +53,10 @@ public final class RouteSearchLine extends Line
         this.from = from;
         this.to = to;
     }
+
+    @Override
+    public String toString()
+    {
+        return "RouteSearchLine [from=" + from + ", to=" + to + ", command=" + command + "]";
+    }
 }

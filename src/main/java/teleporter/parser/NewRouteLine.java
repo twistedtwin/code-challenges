@@ -25,7 +25,6 @@ package teleporter.parser;
 
 import java.util.Objects;
 
-import teleporter.data.City;
 import teleporter.data.Route;
 
 /**
@@ -35,20 +34,24 @@ public final class NewRouteLine extends Line
 {
     /** The route to add. */
     public final Route route;
-    
+
     /**
      * Create a new line representation.
      * 
-     * @param from the starting city
-     * @param to the ending city
+     * @param route the route
      */
-    public NewRouteLine(City from, City to)
+    public NewRouteLine(Route route)
     {
         super(Command.NEW_ROUTE);
-        
-        Objects.requireNonNull(from, "from cannot be null");
-        Objects.requireNonNull(to, "to cannot be null");
-        
-        this.route = new Route(from, to);
+
+        Objects.requireNonNull(route, "route cannot be null");
+
+        this.route = route;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "NewRouteLine [route=" + route + ", command=" + command + "]";
     }
 }

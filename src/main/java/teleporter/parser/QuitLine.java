@@ -35,4 +35,10 @@ public final class QuitLine extends Line
     {
         super(Command.QUIT);
     }
+
+    @Override
+    public String toString()
+    {
+        return "QuitLine [command=" + command + "]";
+    }
 }

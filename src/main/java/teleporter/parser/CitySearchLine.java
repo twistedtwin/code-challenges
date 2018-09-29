@@ -57,4 +57,10 @@ public final class CitySearchLine extends Line
         this.originCity = originCity;
         this.maxJumps = maxJumps;
     }
+
+    @Override
+    public String toString()
+    {
+        return "CitySearchLine [originCity=" + originCity + ", maxJumps=" + maxJumps + ", command=" + command + "]";
+    }
 }
