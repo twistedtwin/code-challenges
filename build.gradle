@@ -1,0 +1,79 @@
+ plugins {
+  id 'java'
+  id 'application'
+}
+
+group                   = 'net.leathermania'
+version                 = "${versionTag}"
+sourceCompatibility     = 1.8
+targetCompatibility     = 1.8
+
+/*
+ * functions
+ */
+def findProperty = {String key, Object defaultVal = null -> 
+    def property = System.getProperty(key) ?: project.hasProperty(key) ? project.property(key) : null
+
+    property ?: defaultVal
+}
+/*
+ * end functions
+ */
+
+/*
+ * application
+ */
+mainClassName = findProperty('mainClass', 'net.leathermania.teleporter.Main')
+
+run {
+    standardInput = System.in
+    if (project.hasProperty("appArgs")) {
+        args(appArgs.split(','))
+    }
+}
+/*
+ * end application
+ */
+
+/*
+ * manifest file
+ */
+ext.buildDate = null
+compileJava.doLast {
+    buildDate = new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+    jar.manifest {
+        attributes(
+            'Built-Date': project.buildDate
+        )
+    }
+}
+        
+tasks.jar.onlyIf { return project.buildDate != null }
+jar {
+    manifest {
+        attributes(
+            'Implementation-Group': project.group,
+            'Implementation-Title': project.name,
+            'Implementation-Version': project.version,        
+            'Implementation-Vendor': "Michael Leatherman",            
+            'Built-By': System.getProperty('user.name'),
+            'Built-JDK': System.getProperty('java.version'),
+            'Built-Host': InetAddress.getLocalHost().getHostName(),                    
+            'Source-Compatibility': project.sourceCompatibility,
+            'Target-Compatibility': project.targetCompatibility            
+        )
+    }
+}
+/*
+ * end manifest file
+ */
+
+task sourceJar(type: Jar) {
+  classifier = 'sources'
+  from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
