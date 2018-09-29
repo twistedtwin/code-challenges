@@ -23,7 +23,7 @@ def findProperty = {String key, Object defaultVal = null ->
 /*
  * application
  */
-mainClassName = findProperty('mainClass', 'net.leathermania.teleporter.Main')
+mainClassName = findProperty('mainClass', 'teleporter.Main')
 
 run {
     standardInput = System.in
