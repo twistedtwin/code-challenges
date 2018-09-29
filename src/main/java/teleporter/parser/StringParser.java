@@ -1,5 +1,5 @@
 /**
- * Command.java
+ * StringParser.java
  *
  * Copyright 2018 Michael G. Leatherman <michael.g.leatherman@gmail.com>
  *
@@ -24,20 +24,11 @@
 package teleporter.parser;
 
 /**
- * Provides an enum for identifying a line representation.
+ * Parses a line to generate a Line.
  */
-public enum Command
+public class StringParser
 {
-    /** Create a new route. */
-    NEW_ROUTE,
-    /** Identify all cities within a certain number of jumps from a city. */
-    CITY_SEARCH,
-    /** Determine if a route exists between two cities. */
-    ROUTE_SEARCH,
-    /** Identify if a loop exists for a given city. */
-    LOOP_SEARCH,
-    /** Show the current routes. */
-    SHOW_ROUTES,
-    /** Quit the application. */
-    QUIT;
+    public Line parse(String string) {
+        return null;
+    }
 }

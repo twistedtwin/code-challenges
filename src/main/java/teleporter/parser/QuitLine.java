@@ -1,5 +1,5 @@
 /**
- * Command.java
+ * QuitLine.java
  *
  * Copyright 2018 Michael G. Leatherman <michael.g.leatherman@gmail.com>
  *
@@ -24,20 +24,15 @@
 package teleporter.parser;
 
 /**
- * Provides an enum for identifying a line representation.
+ * Represents a quit line.
  */
-public enum Command
+public final class QuitLine extends Line
 {
-    /** Create a new route. */
-    NEW_ROUTE,
-    /** Identify all cities within a certain number of jumps from a city. */
-    CITY_SEARCH,
-    /** Determine if a route exists between two cities. */
-    ROUTE_SEARCH,
-    /** Identify if a loop exists for a given city. */
-    LOOP_SEARCH,
-    /** Show the current routes. */
-    SHOW_ROUTES,
-    /** Quit the application. */
-    QUIT;
+    /**
+     * Creates a new line representation.
+     */
+    public QuitLine()
+    {
+        super(Command.QUIT);
+    }
 }
