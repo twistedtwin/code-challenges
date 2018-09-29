@@ -1,5 +1,5 @@
 /**
- * Route.java
+ * City.java
  *
  * Copyright 2018 Michael G. Leatherman <michael.g.leatherman@gmail.com>
  *
@@ -21,27 +21,67 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package teleporter;
+package teleporter.data;
+
+import java.util.Objects;
 
 /**
- * Provides a data class for storing a route between two cities.
+ * Provides a data class for a city.
  */
-public final class Route
+public class City
 {
-    /** The starting city. */
-    public final City from;
-    /** The ending city. */
-    public final City to;
+    /** The name of the city. */
+    public final String name;
 
     /**
-     * Creates a new route.
+     * Creates a new city with the input name.
      * 
-     * @param from the starting city
-     * @param to the ending city
+     * @param name the name of the city
      */
-    public Route(City from, City to)
+    public City(String name)
+    {        
+        Objects.requireNonNull(name, "name cannot be null");
+        
+        this.name = name;
+    }
+
+    @Override
+    public int hashCode()
     {
-        this.from = from;
-        this.to = to;
+        int result = 1;
+
+        final int prime = 31;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+
+        if (obj == null)
+        {
+            return false;
+        }
+
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+
+        City other = (City) obj;
+        if (name == null)
+        {
+            return other.name == null;
+        }
+        else
+        {
+            return name.equals(other.name);
+        }
     }
 }

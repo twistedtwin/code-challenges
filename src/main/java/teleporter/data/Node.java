@@ -21,9 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package teleporter;
+package teleporter.data;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -43,6 +44,8 @@ public class Node
      */
     public Node(City city)
     {
+        Objects.requireNonNull(city, "city cannot be null");
+        
         this.city = city;
     }
 }

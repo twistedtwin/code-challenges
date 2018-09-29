@@ -1,5 +1,5 @@
 /**
- * City.java
+ * Route.java
  *
  * Copyright 2018 Michael G. Leatherman <michael.g.leatherman@gmail.com>
  *
@@ -21,23 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package teleporter;
+package teleporter.data;
+
+import java.util.Objects;
 
 /**
- * Provides a data class for a city.
+ * Provides a data class for storing a route between two cities.
  */
-public class City
+public final class Route
 {
-    /** The name of the city. */
-    public final String name;
+    /** The starting city. */
+    public final City from;
+    /** The ending city. */
+    public final City to;
 
     /**
-     * Creates a new city with the input name.
+     * Creates a new route.
      * 
-     * @param name the name of the city
+     * @param from the starting city
+     * @param to the ending city
      */
-    public City(String name)
+    public Route(City from, City to)
     {
-        this.name = name;
+        Objects.requireNonNull(from, "from cannot be null");
+        Objects.requireNonNull(to, "to cannot be null");
+        
+        this.from = from;
+        this.to = to;
     }
 }
