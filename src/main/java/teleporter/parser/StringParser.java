@@ -41,8 +41,19 @@ public class StringParser
 {
     private static final Logger LOG = Logger.getLogger(StringParser.class.getName());
 
+    private static final Pattern CITY_SEARCH_PATTERN;
+    private static final Pattern LOOP_SEARCH_PATTERN;
+    private static final Pattern ROUTE_SEARCH_PATTERN;
+
     private final Map<String, City> cityMap = new HashMap<>();
     private final Map<Route, Route> routeMap = new HashMap<>();
+
+    static
+    {
+        CITY_SEARCH_PATTERN = Pattern.compile("cities from ([\\sa-z]+?) in (\\d+) jumps");
+        LOOP_SEARCH_PATTERN = Pattern.compile("loop possible from ([\\sa-z]+)");
+        ROUTE_SEARCH_PATTERN = Pattern.compile("can i teleport from ([\\sa-z]+?) to ([\\sa-z]+)");
+    }
 
     public Line parse(String string)
     {
@@ -53,37 +64,38 @@ public class StringParser
         String lower = string.trim().toLowerCase();
 
         int index = lower.indexOf(" ");
-
-        if (index != -1)
+        if (index == -1)
         {
-            String first = lower.substring(0, index);
+            index = lower.length();
+        }
 
-            switch (first)
-            {
-            case "cities":
-                line = parseCitySearchLine(lower);
-                break;
+        String first = lower.substring(0, index);
 
-            case "can":
-                line = parseRouteSearchLine(lower);
-                break;
+        switch (first)
+        {
+        case "cities":
+            line = parseCitySearchLine(lower);
+            break;
 
-            case "loop":
-                line = parseLoopSearchLine(lower);
-                break;
+        case "can":
+            line = parseRouteSearchLine(lower);
+            break;
 
-            case "show":
-                line = createShowRouteLine();
-                break;
+        case "loop":
+            line = parseLoopSearchLine(lower);
+            break;
 
-            case "quit":
-                line = createQuitLine();
-                break;
+        case "show":
+            line = createShowRouteLine();
+            break;
 
-            default:
-                line = parseNewRouteLine(lower);
-                break;
-            }
+        case "quit":
+            line = createQuitLine();
+            break;
+
+        default:
+            line = parseNewRouteLine(lower);
+            break;
         }
 
         return line;
@@ -93,9 +105,7 @@ public class StringParser
     {
         CitySearchLine line = null;
 
-        Pattern p = Pattern.compile("cities from ([\\sa-zA-Z]+?) in (\\d+) jumps");
-        Matcher m = p.matcher(string);
-
+        Matcher m = CITY_SEARCH_PATTERN.matcher(string);
         if (m.matches())
         {
             String cityName = m.group(1);
@@ -125,9 +135,7 @@ public class StringParser
     {
         LoopSearchLine line = null;
 
-        Pattern p = Pattern.compile("loop possible from ([\\sa-zA-Z]+)");
-        Matcher m = p.matcher(string);
-
+        Matcher m = LOOP_SEARCH_PATTERN.matcher(string);
         if (m.matches())
         {
             String cityName = m.group(1);
@@ -166,9 +174,7 @@ public class StringParser
     {
         RouteSearchLine line = null;
 
-        Pattern p = Pattern.compile("can I teleport from ([\\\\sa-zA-Z]+?) to ([\\\\sa-zA-Z]+)");
-        Matcher m = p.matcher(string);
-
+        Matcher m = ROUTE_SEARCH_PATTERN.matcher(string);
         if (m.matches())
         {
             String fromCityName = m.group(1);
