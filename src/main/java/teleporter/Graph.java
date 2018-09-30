@@ -34,13 +34,18 @@ import teleporter.data.Node;
 import teleporter.data.Route;
 
 /**
- *
+ * Provides an undirected cyclic graph for modeling a teleportation network.
  */
 public class Graph
 {
     private final Map<City, Node> vertexMap = new HashMap<>();
     private final Function<City, Node> cityToNode = (city) -> new Node(city);
 
+    /**
+     * Adds a new route to the network.
+     *
+     * @param route the route to add
+     */
     public void addRoute(Route route)
     {
         Node fromNode = this.vertexMap.computeIfAbsent(route.from, this.cityToNode);
@@ -50,6 +55,11 @@ public class Graph
         toNode.neighbors.add(fromNode);
     }
 
+    /**
+     * Gets all known routes from the network.
+     *
+     * @return the routes
+     */
     public Set<Route> getRoutes()
     {
         Set<Route> routes = new HashSet<>();
@@ -65,6 +75,14 @@ public class Graph
         return routes;
     }
 
+    /**
+     * Gets the teleportation neighborhood.
+     *
+     * @param originCity the origin of the neighborhood
+     * @param maxJumps   the maximum number of jumps allowed when defining the
+     *                   neighborhood
+     * @return all cities that require at most maxJumps jumps from the origin city
+     */
     public Set<City> getNeighborhood(City originCity, int maxJumps)
     {
         Set<City> neighborhood = this.getNeighborhood(
@@ -95,6 +113,14 @@ public class Graph
         return visited;
     }
 
+    /**
+     * Determines if a set of routes exist from one city to another.
+     *
+     * @param fromCity the origin city
+     * @param toCity   the destination city
+     * @return if it is possible to teleport from the origin city to the destination
+     *         city
+     */
     public boolean canTeleport(City fromCity, City toCity)
     {
         Node fromNode = this.vertexMap.computeIfAbsent(fromCity, this.cityToNode);
@@ -126,6 +152,13 @@ public class Graph
         return canTeleport;
     }
 
+    /**
+     * Determines if a user can leave given city and return to it without repeating
+     * any routes.
+     *
+     * @param city the city to test
+     * @return if the city is on a loop
+     */
     public boolean isCityOnLoop(City city)
     {
         Node fromNode = this.vertexMap.computeIfAbsent(city, this.cityToNode);

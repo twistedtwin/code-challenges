@@ -26,6 +26,7 @@ package teleporter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Objects;
 import java.util.Set;
 
 import teleporter.data.City;
@@ -38,7 +39,7 @@ import teleporter.parser.RouteSearchLine;
 import teleporter.parser.StringParser;
 
 /**
- *
+ * Provides the primary interface for the application.
  */
 public class Main
 {
@@ -52,6 +53,12 @@ public class Main
     private final StringParser parser = new StringParser();
     private final Graph graph = new Graph();
 
+    /**
+     * Primary entry point for interactive use.
+     *
+     * @param args not used
+     * @throws IOException if unable to process input
+     */
     public static void main(String[] args) throws IOException
     {
         Main main = new Main();
@@ -80,8 +87,16 @@ public class Main
         }
     }
 
+    /**
+     * Parses a string and updates the graph accordingly.
+     *
+     * @param string the string to parse
+     * @return the response from the graph (may be null) *
+     */
     public String parse(String string)
     {
+        Objects.requireNonNull(string, "string cannot be null");
+
         Line line = this.parser.parse(string);
 
         String response = null;
