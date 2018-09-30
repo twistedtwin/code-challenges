@@ -9,8 +9,9 @@ This project is implemented using Java 8.  It has no other dependencies.
 ## Building
 
 Gradle is used for building.
-
-`gradlew clean build`
+```
+gradlew  --console=verbose clean build
+```
 
 ## Running
 
