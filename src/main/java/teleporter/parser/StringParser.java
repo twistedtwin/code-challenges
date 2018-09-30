@@ -50,9 +50,9 @@ public class StringParser
 
     static
     {
-        CITY_SEARCH_PATTERN = Pattern.compile("cities from ([\\sa-z]+?) in (\\d+) jumps");
-        LOOP_SEARCH_PATTERN = Pattern.compile("loop possible from ([\\sa-z]+)");
-        ROUTE_SEARCH_PATTERN = Pattern.compile("can i teleport from ([\\sa-z]+?) to ([\\sa-z]+)");
+        CITY_SEARCH_PATTERN = Pattern.compile("cities from ([\\sa-zA-Z]+?) in (\\d+) jumps");
+        LOOP_SEARCH_PATTERN = Pattern.compile("loop possible from ([\\sa-zA-Z]+)");
+        ROUTE_SEARCH_PATTERN = Pattern.compile("can I teleport from ([\\sa-zA-Z]+?) to ([\\sa-zA-Z]+)");
     }
 
     /**
@@ -67,28 +67,28 @@ public class StringParser
 
         Objects.requireNonNull(string, "string cannot be null");
 
-        String lower = string.trim().toLowerCase();
+        String trimmed = string.trim();
 
-        int index = lower.indexOf(" ");
+        int index = trimmed.indexOf(" ");
         if (index == -1)
         {
-            index = lower.length();
+            index = trimmed.length();
         }
 
-        String first = lower.substring(0, index);
+        String first = trimmed.substring(0, index);
 
         switch (first)
         {
         case "cities":
-            line = this.parseCitySearchLine(lower);
+            line = this.parseCitySearchLine(trimmed);
             break;
 
         case "can":
-            line = this.parseRouteSearchLine(lower);
+            line = this.parseRouteSearchLine(trimmed);
             break;
 
         case "loop":
-            line = this.parseLoopSearchLine(lower);
+            line = this.parseLoopSearchLine(trimmed);
             break;
 
         case "show":
@@ -100,7 +100,7 @@ public class StringParser
             break;
 
         default:
-            line = this.parseNewRouteLine(lower);
+            line = this.parseNewRouteLine(trimmed);
             break;
         }
 
@@ -213,6 +213,9 @@ public class StringParser
         City fromCity = this.getCity(from);
         City toCity = this.getCity(to);
 
-        return Route.getRoute(this.routeMap, fromCity, toCity);
+        Route key = new Route(fromCity, toCity);
+        Route route = this.routeMap.computeIfAbsent(key, (r) -> r);
+
+        return route;
     }
 }
