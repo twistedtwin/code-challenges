@@ -9,6 +9,7 @@ This project is implemented using Java 8.  It has no other dependencies.
 ## Building
 
 Gradle is used for building.
+
 ```
 gradlew  --console=verbose clean build
 ```
@@ -22,6 +23,9 @@ unzip teleporter-SNAPSHOT.zip
 cd teleporter-SNAPSHOT
 bin/teleporter.bat
 ```
+
+Enter `quit` while running to exit. 
+
 
 ## License
 
