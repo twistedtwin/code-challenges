@@ -163,9 +163,12 @@ public class StringParser
             String fromCity = string.substring(0, index).trim();
             String toCity = string.substring(index + 1).trim();
 
-            Route route = this.getRoute(fromCity, toCity);
+            if (!fromCity.equals(toCity))
+            {
+                Route route = this.getRoute(fromCity, toCity);
 
-            line = new NewRouteLine(route);
+                line = new NewRouteLine(route);
+            }
         }
 
         return line;
@@ -202,33 +205,14 @@ public class StringParser
 
     private City getCity(String cityName)
     {
-        return this.cityMap.getOrDefault(cityName, new City(cityName));
+        return this.cityMap.computeIfAbsent(cityName, (name) -> new City(name));
     }
 
     private Route getRoute(String from, String to)
     {
-        Route route = null;
-
         City fromCity = this.getCity(from);
         City toCity = this.getCity(to);
 
-        Route key = new Route(fromCity, toCity);
-        route = this.routeMap.get(key);
-
-        if (route == null)
-        {
-            key = new Route(toCity, fromCity);
-
-            route = this.routeMap.get(key);
-        }
-
-        if (route == null)
-        {
-            route = key;
-
-            this.routeMap.put(route, route);
-        }
-
-        return route;
+        return Route.getRoute(this.routeMap, fromCity, toCity);
     }
 }
