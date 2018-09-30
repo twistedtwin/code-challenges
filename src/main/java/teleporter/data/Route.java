@@ -58,16 +58,14 @@ public final class Route
 
         if (route == null)
         {
-            key = new Route(to, from);
-
-            route = map.get(key);
+            route = map.get(new Route(to, from));
         }
 
         if (route == null)
         {
             route = key;
 
-            map.put(route, route);
+            map.put(key, key);
         }
 
         return route;
