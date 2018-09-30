@@ -3,8 +3,8 @@
  *
  * Copyright 2018 Michael G. Leatherman <michael.g.leatherman@gmail.com>
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy 
- * of this software and associated documentation files (the "Software"), to deal 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
@@ -13,7 +13,7 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
@@ -35,7 +35,7 @@ public class City
 
     /**
      * Creates a new city with the input name.
-     * 
+     *
      * @param name the name of the city
      */
     public City(String name)
@@ -51,7 +51,7 @@ public class City
         int result = 1;
 
         final int prime = 31;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
 
         return result;
     }
@@ -69,25 +69,25 @@ public class City
             return false;
         }
 
-        if (getClass() != obj.getClass())
+        if (this.getClass() != obj.getClass())
         {
             return false;
         }
 
         City other = (City) obj;
-        if (name == null)
+        if (this.name == null)
         {
             return other.name == null;
         }
         else
         {
-            return name.equals(other.name);
+            return this.name.equals(other.name);
         }
     }
 
     @Override
     public String toString()
     {
-        return "City [name=" + name + "]";
+        return "City [name=" + this.name + "]";
     }
 }

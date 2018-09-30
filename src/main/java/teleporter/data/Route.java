@@ -3,8 +3,8 @@
  *
  * Copyright 2018 Michael G. Leatherman <michael.g.leatherman@gmail.com>
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy 
- * of this software and associated documentation files (the "Software"), to deal 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
@@ -13,7 +13,7 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
@@ -37,7 +37,7 @@ public final class Route
 
     /**
      * Creates a new route.
-     * 
+     *
      * @param from the starting city
      * @param to   the ending city
      */
@@ -56,8 +56,8 @@ public final class Route
         int result = 1;
 
         final int prime = 31;
-        result = prime * result + ((from == null) ? 0 : from.hashCode());
-        result = prime * result + ((to == null) ? 0 : to.hashCode());
+        result = prime * result + ((this.from == null) ? 0 : this.from.hashCode());
+        result = prime * result + ((this.to == null) ? 0 : this.to.hashCode());
 
         return result;
     }
@@ -75,32 +75,32 @@ public final class Route
             return false;
         }
 
-        if (getClass() != obj.getClass())
+        if (this.getClass() != obj.getClass())
         {
             return false;
         }
 
         Route other = (Route) obj;
-        if (from == null)
+        if (this.from == null)
         {
             if (other.from != null)
             {
                 return false;
             }
         }
-        else if (!from.equals(other.from))
+        else if (!this.from.equals(other.from))
         {
             return false;
         }
 
-        if (to == null)
+        if (this.to == null)
         {
             if (other.to != null)
             {
                 return false;
             }
         }
-        else if (!to.equals(other.to))
+        else if (!this.to.equals(other.to))
         {
             return false;
         }
@@ -111,6 +111,6 @@ public final class Route
     @Override
     public String toString()
     {
-        return "Route [from=" + from + ", to=" + to + "]";
+        return "Route [from=" + this.from + ", to=" + this.to + "]";
     }
 }

@@ -3,8 +3,8 @@
  *
  * Copyright 2018 Michael G. Leatherman <michael.g.leatherman@gmail.com>
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy 
- * of this software and associated documentation files (the "Software"), to deal 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
@@ -13,7 +13,7 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
@@ -55,6 +55,12 @@ public class StringParser
         ROUTE_SEARCH_PATTERN = Pattern.compile("can i teleport from ([\\sa-z]+?) to ([\\sa-z]+)");
     }
 
+    /**
+     * Parses the input string to a line representation.
+     *
+     * @param string the input string
+     * @return the line representation or null if unable to parse
+     */
     public Line parse(String string)
     {
         Line line = null;
@@ -74,27 +80,27 @@ public class StringParser
         switch (first)
         {
         case "cities":
-            line = parseCitySearchLine(lower);
+            line = this.parseCitySearchLine(lower);
             break;
 
         case "can":
-            line = parseRouteSearchLine(lower);
+            line = this.parseRouteSearchLine(lower);
             break;
 
         case "loop":
-            line = parseLoopSearchLine(lower);
+            line = this.parseLoopSearchLine(lower);
             break;
 
         case "show":
-            line = createShowRouteLine();
+            line = this.createShowRouteLine();
             break;
 
         case "quit":
-            line = createQuitLine();
+            line = this.createQuitLine();
             break;
 
         default:
-            line = parseNewRouteLine(lower);
+            line = this.parseNewRouteLine(lower);
             break;
         }
 
