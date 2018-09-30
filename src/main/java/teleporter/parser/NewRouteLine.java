@@ -46,6 +46,11 @@ public final class NewRouteLine extends Line
 
         Objects.requireNonNull(route, "route cannot be null");
 
+        if (route.from.equals(route.to))
+        {
+            throw new IllegalArgumentException("from city is the same as the to city");
+        }
+
         this.route = route;
     }
 
