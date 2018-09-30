@@ -23,6 +23,7 @@
  */
 package teleporter.data;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -48,6 +49,28 @@ public final class Route
 
         this.from = from;
         this.to = to;
+    }
+
+    public static Route getRoute(Map<Route, Route> map, City from, City to)
+    {
+        Route key = new Route(from, to);
+        Route route = map.get(key);
+
+        if (route == null)
+        {
+            key = new Route(to, from);
+
+            route = map.get(key);
+        }
+
+        if (route == null)
+        {
+            route = key;
+
+            map.put(route, route);
+        }
+
+        return route;
     }
 
     @Override
