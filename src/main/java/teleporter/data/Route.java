@@ -107,4 +107,10 @@ public final class Route
 
         return true;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Route [from=" + from + ", to=" + to + "]";
+    }
 }

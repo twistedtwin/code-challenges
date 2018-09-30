@@ -39,9 +39,9 @@ public class City
      * @param name the name of the city
      */
     public City(String name)
-    {        
+    {
         Objects.requireNonNull(name, "name cannot be null");
-        
+
         this.name = name;
     }
 
@@ -83,5 +83,11 @@ public class City
         {
             return name.equals(other.name);
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        return "City [name=" + name + "]";
     }
 }
