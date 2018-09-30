@@ -23,7 +23,6 @@
  */
 package teleporter.data;
 
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -47,28 +46,16 @@ public final class Route
         Objects.requireNonNull(from, "from cannot be null");
         Objects.requireNonNull(to, "to cannot be null");
 
-        this.from = from;
-        this.to = to;
-    }
-
-    public static Route getRoute(Map<Route, Route> map, City from, City to)
-    {
-        Route key = new Route(from, to);
-        Route route = map.get(key);
-
-        if (route == null)
+        if (from.name.compareTo(to.name) < 0)
         {
-            route = map.get(new Route(to, from));
+            this.from = from;
+            this.to = to;
         }
-
-        if (route == null)
+        else
         {
-            route = key;
-
-            map.put(key, key);
+            this.from = to;
+            this.to = from;
         }
-
-        return route;
     }
 
     @Override

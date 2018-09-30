@@ -35,7 +35,7 @@ public class Node
     /** The node data. */
     public final City city;
     /** The set of adjacent nodes. */
-    public final Set<Node> leaves = new HashSet<>();
+    public final Set<Node> neighbors = new HashSet<>();
 
     /**
      * Creates a new node with the input data.
@@ -47,5 +47,11 @@ public class Node
         Objects.requireNonNull(city, "city cannot be null");
 
         this.city = city;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Node [city=" + this.city + "]";
     }
 }
